@@ -23,7 +23,7 @@ function Aluno (nome, qtdDeFaltas, notas) {
 
 }
     // ============ calcular a media do aluno  ===============
-let aluno1 = new Aluno("Monique", 5, [7, 8, 8, 9]);
+let aluno1 = new Aluno("Monique", 3, [7, 8, 8, 9]);
 let aluno2 = new Aluno("Douglas", 1, [10, 9, 7, 3]);
 let aluno3 = new Aluno("Carol", 2, [7, 4, 6, 7]);
 let aluno4 = new Aluno("Erik", 2, [5, 9, 3, 4]);
