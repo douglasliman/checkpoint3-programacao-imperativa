@@ -1,0 +1,78 @@
+//  ======== FUNÇÃO CONSTRUTORAA ===============
+function Aluno (nome, qtdDeFaltas, notas) {
+      // ========= ATRIBUTOS DO ALUNO ==============
+    this.nome = nome;
+    this.qtdDeFaltas = qtdDeFaltas;
+    this.notas = notas;
+
+    this.calculaMedia = function () {
+        let soma = 0
+        let media =0
+        for(let i = 0; i < this.notas.length; i++) {
+            soma += notas[i];
+            media = soma / this.notas.length;
+        }
+
+      return media;
+    };
+  // ============= FALTAS DE ALUNOS  ======================
+    this.faltas = function () {
+        this.qtdDeFaltas += 1;
+        return this.qtdDeFaltas;
+    }
+
+}
+    // ============ calcular a media do aluno  ===============
+let aluno1 = new Aluno("Monique", 5, [7, 8, 8, 9]);
+let aluno2 = new Aluno("Douglas", 1, [10, 9, 7, 3]);
+let aluno3 = new Aluno("Carol", 2, [7, 4, 6, 7]);
+let aluno4 = new Aluno("Erik", 2, [5, 9, 3, 4]);
+let aluno5 = new Aluno("Vinicius", 4, [9, 7, 3, 5]);
+
+const listaDeEstudantes = [aluno1, aluno2, aluno3, aluno4, aluno5];
+
+// ================= curso criado ===================
+const curso = {
+    nomeDoCurso: "CTD",
+    notaDeAprovacao: 7,
+    faltasMaximas: 3,
+    listaDeEstudantes: listaDeEstudantes,
+    adicionarAluno: function (nome, qtdDeFaltas, notas) {
+        let aluno = new Aluno(nome, qtdDeFaltas, notas);
+        this.listaDeEstudantes.push(aluno);
+    },
+
+      // ========== CONSULTAR ALUNO ==================
+    consultarAluno: function (nome) {
+        const aluno = this.listaDeEstudantes.find((aluno) => {
+            return aluno.nome === nome;
+        });
+        return aluno;
+    },
+      // ============== MEDIA ALUNO ========================
+    media: function (nome) {
+        let aluno = this.consultarAluno(nome);
+        let media = aluno.calculaMedia();
+        let resultado = false; 
+        if(media >= this.notaDeAprovacao && aluno.qtdDeFaltas < this.faltasMaximas){
+            console.log(`O(A) Aluno(a) ${aluno.nome} foi Aprovado(a)!`);
+            resultado = true;
+        } else if(aluno.qtdDeFaltas === this.faltasMaximas && media > this.notaDeAprovacao * 1.1){
+            resultado = true;
+        } else {
+            console.log(`O(a) ${aluno.nome} foi reprovado(a).`);
+        }
+        return resultado;
+    },
+
+      // ========== TESTAR A APROVAÇÃO ==============================
+  // ======== map vai retornar um novo array  de true e false========
+    aprovacao: function () {
+        const aprovados = this.listaDeEstudantes.map((aluno) => {
+            return this.media(aluno.nome);
+        });
+        return aprovados;
+    }
+}
+
+console.log(curso.aprovacao());
